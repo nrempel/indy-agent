@@ -4,8 +4,8 @@ over the network, communicating with the ledger, passing messages to handlers,
 and storing data in the wallet.
 """
 
-from .transport.http import Http as HttpTransport
-from .transport import InvalidTransportException
+from ..transport.http import Http as HttpTransport
+from ..transport import InvalidTransportException
 
 
 class Dispatcher:

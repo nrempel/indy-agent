@@ -5,5 +5,5 @@ from .message_types import MessageType
 
 class AgentMessage(ABC):
     @abstractproperty
-    def type(self) -> MessageType:
+    def type(self) -> str:
         pass

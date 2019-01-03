@@ -13,7 +13,7 @@ class AgentEndpoint:
         self.uri = uri
 
 
-class UserSchema(Schema):
+class AgentEndpointSchema(Schema):
     did = fields.Str()
     verkey = fields.Str()
     uri = fields.Str()

@@ -1,6 +1,6 @@
 import argparse
 
-from .dispatcher import Dispatcher
+from .conductor import Conductor
 
 PARSER = argparse.ArgumentParser(description="Runs an Indy Agent.")
 PARSER.add_argument(
@@ -35,8 +35,8 @@ def main():
     host = args.host
     port = args.port
 
-    dispatcher = Dispatcher(transport, host, port)
-    dispatcher.start()
+    conductor = Conductor(transport, host, port)
+    conductor.start()
 
 
 if __name__ == "__main__":

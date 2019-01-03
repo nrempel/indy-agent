@@ -1,5 +1,5 @@
 """
-The dispatcher is responsible for coordinating messages that are received
+The conductor is responsible for coordinating messages that are received
 over the network, communicating with the ledger, passing messages to handlers,
 and storing data in the wallet.
 """
@@ -8,7 +8,7 @@ from ..transport.http import Http as HttpTransport
 from ..transport import InvalidTransportException
 
 
-class Dispatcher:
+class Conductor:
     def __init__(self, transport: str, host: str, port: int) -> None:
         self.transport = transport
         self.host = host

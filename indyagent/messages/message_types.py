@@ -1,7 +1,6 @@
 from enum import Enum
 
 class MessageType(Enum):
-    
     # Connection Messages
     CONNECTION_INVITATION = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation"
     CONNECTION_REQUEST = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/request"

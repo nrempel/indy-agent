@@ -10,8 +10,9 @@ class MessageType(Enum):
     CREDENTIAL_OFFER = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/credential_offer"
     CREDENTIAL_REQUEST = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/credential_request"
     CREDENTIAL = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/credential"
+    
     PROOF_REQUEST = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/proof_request"
-    DISCLOSED_PROOF = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/disclosed_proof"
+    PROOF = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/disclosed_proof"
 
     # Routing Messages
-    Forward = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward"
+    FORWARD = "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/routing/1.0/forward"

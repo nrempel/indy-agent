@@ -2,10 +2,10 @@
 Represents an invitation message for establishing connection.
 """
 
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
 from ..agent_message import AgentMessage
-from ..message_types import MessageType
+from ..message_types import MessageTypes
 from ..validators import must_not_be_blank
 
 from ...models.agent_endpoint import AgentEndpoint, AgentEndpointSchema
@@ -20,7 +20,7 @@ class ConnectionInvitation(AgentMessage):
     @property
     # Avoid clobbering builtin property
     def _type(self) -> str:
-        return MessageType.CONNECTION_INVITATION
+        return MessageTypes.CONNECTION_INVITATION.value
 
 
 class ConnectionInvitationSchema(Schema):
@@ -29,3 +29,7 @@ class ConnectionInvitationSchema(Schema):
     endpoint = fields.Nested(AgentEndpointSchema, validate=must_not_be_blank)
     image_url = fields.Str()
     connection_key = fields.Str()
+
+    @post_load
+    def make_model(self, data: dict) -> ConnectionInvitation:
+        return ConnectionInvitation(**data)

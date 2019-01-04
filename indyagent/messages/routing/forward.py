@@ -2,10 +2,10 @@
 Represents a forward message.
 """
 
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
 from ..agent_message import AgentMessage
-from ..message_types import MessageType
+from ..message_types import MessageTypes
 
 
 class Forward(AgentMessage):
@@ -13,8 +13,8 @@ class Forward(AgentMessage):
         self.to = to
         self.msg = msg
 
-    def type(self):
-        return MessageType.FORWARD
+    def _type(self):
+        return MessageTypes.FORWARD.value
 
 
 class ForwardSchema(Schema):
@@ -22,3 +22,7 @@ class ForwardSchema(Schema):
     _type = fields.Str(data_key="@type")
     to = fields.Str()
     msg = fields.Str()
+
+    @post_load
+    def make_model(self, data: dict) -> Forward:
+        return Forward(**data)

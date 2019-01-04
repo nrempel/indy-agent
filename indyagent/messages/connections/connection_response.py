@@ -2,10 +2,10 @@
 Represents a connection response message
 """
 
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
 from ..agent_message import AgentMessage
-from ..message_types import MessageType
+from ..message_types import MessageTypes
 from ..validators import must_not_be_blank
 
 from ...models.agent_endpoint import AgentEndpoint, AgentEndpointSchema
@@ -17,8 +17,8 @@ class ConnectionResponse(AgentMessage):
         self.did = did
         self.verkey = verkey
 
-    def type(self):
-        return MessageType.CONNECTION_RESPONSE
+    def _type(self):
+        return MessageTypes.CONNECTION_RESPONSE.value
 
 
 class ConnectionResponseSchema(Schema):
@@ -27,3 +27,7 @@ class ConnectionResponseSchema(Schema):
     endpoint = fields.Nested(AgentEndpointSchema, validate=must_not_be_blank)
     did = fields.Str()
     verkey = fields.Str()
+
+    @post_load
+    def make_model(self, data: dict) -> ConnectionResponse:
+        return ConnectionResponse(**data)

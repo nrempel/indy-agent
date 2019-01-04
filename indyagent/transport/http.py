@@ -33,4 +33,4 @@ class Http(Transport):
             raise InvalidMessageError(
                 "Request body must contain an application/json payload"
             )
-
+        return body

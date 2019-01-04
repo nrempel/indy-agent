@@ -2,10 +2,10 @@
 Represents a connection request message.
 """
 
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
 from ..agent_message import AgentMessage
-from ..message_types import MessageType
+from ..message_types import MessageTypes
 from ..validators import must_not_be_blank
 
 from ...models.agent_endpoint import AgentEndpoint, AgentEndpointSchema
@@ -17,8 +17,9 @@ class ConnectionRequest(AgentMessage):
         self.did = did
         self.verkey = verkey
 
-    def type(self):
-        return MessageType.CONNECTION_REQUEST
+    def _type(self):
+        # Avoid clobbering builtin property
+        return MessageTypes.CONNECTION_REQUEST.value
 
 
 class ConnectionRequestSchema(Schema):
@@ -27,3 +28,7 @@ class ConnectionRequestSchema(Schema):
     endpoint = fields.Nested(AgentEndpointSchema, validate=must_not_be_blank)
     did = fields.Str()
     verkey = fields.Str()
+
+    @post_load
+    def make_model(self, data: dict) -> ConnectionRequest:
+        return ConnectionRequest(**data)

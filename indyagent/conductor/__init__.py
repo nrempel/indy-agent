@@ -7,6 +7,8 @@ and storing data in the wallet.
 from ..transport.http import Http as HttpTransport
 from ..transport import InvalidTransportException
 
+from ..messages.message_converter import MessageConverter
+
 
 class Conductor:
     def __init__(self, transport: str, host: str, port: int) -> None:
@@ -21,5 +23,7 @@ class Conductor:
         else:
             raise InvalidTransportException()
 
-    def message_handler(self, message: dict) -> None:
+    def message_handler(self, message_object: dict) -> None:
+        message = MessageConverter.object_to_message(message_object)
         print(message)
+

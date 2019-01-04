@@ -2,10 +2,10 @@
 A proof content message.
 """
 
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, post_load
 
 from ..agent_message import AgentMessage
-from ..message_types import MessageType
+from ..message_types import MessageTypes
 
 
 class Proof(AgentMessage):
@@ -13,8 +13,8 @@ class Proof(AgentMessage):
         self.proof_json = proof_json
         self.request_nonce = request_nonce
 
-    def type(self):
-        return MessageType.PROOF
+    def _type(self):
+        return MessageTypes.PROOF.value
 
 
 class ProofSchema(Schema):
@@ -22,3 +22,7 @@ class ProofSchema(Schema):
     _type = fields.Str(data_key="@type")
     proof_json = fields.Str()
     request_nonce = fields.Str()
+
+    @post_load
+    def make_model(self, data: dict) -> Proof:
+        return Proof(**data)
